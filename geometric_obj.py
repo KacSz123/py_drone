@@ -3,13 +3,13 @@ import numpy as np
 import math
 from vector_and_matrix import MatrixNxN, Vector
 class Geometric_obj(ABC):
-    __vertexesList=[]
-    __midPoint = Vector(3)
-    __fileHandler = None
+    vertexesList=[]
+    midPt = Vector(3)
+    fileHandler = None
     def moveObject(self, vector):
         for i in self.__vertexesList:
             i = i+vector
-
+        self.__midPt = self.__midPt+vector
 
     def rotateObject(self, angle, axis='Z'):
         if not isinstance(angle, float) or not isinstance(angle, int) or not isinstance(axis,str):
@@ -39,7 +39,7 @@ class Geometric_obj(ABC):
     def __str__(self):
         raise NotImplementedError
     
-    @abstractmethod
-    def printVertexes(self):
-        raise NotImplementedError
+    # @abstractmethod
+    # def printVertexes(self):
+    #     raise NotImplementedError
     

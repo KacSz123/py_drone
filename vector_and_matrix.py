@@ -87,14 +87,31 @@ class Vector():
         self.__size = size
         if coord == None:
             self.__coordinates = np.array([0.0]*size)
-        elif isinstance(coord, list) and len(coord) == size:
-            self.__coordinates = np.array([i for i in coord])
+        elif (isinstance(coord, list) or isinstance(coord, tuple))and len(coord) == size:
+            self.__coordinates = np.array(coord)
         else:
             raise ValueError
     def getSize(self):
         return self.__size
     def getCoords(self):
         return self.__coordinates
+    def getCoord(self, i):
+        if i>=self.__size:
+            raise ValueError('Vector size exceeded')
+        return self.__coordinates[i]
+    def setCoords(self,coords):
+        # print('ugabuga')
+        print(coords)
+        if self.__size!=3:
+            raise ValueError('Object must be instance of Vector(3)')
+        if not isinstance(coords,tuple) and len(coords)!=3:
+            raise TypeError('Coords should be tuple of lenghth 3: (x,y,z)')
+        else:
+            self.__coordinates[0]=coords[0]
+            self.__coordinates[1]=coords[1]
+            self.__coordinates[2]=coords[2]
+
+
     def __add__(self, other):
         if isinstance(other, Vector):
             if self.__size != other.getSize():
@@ -105,7 +122,6 @@ class Vector():
         else:
             raise TypeError('Unsuported type')
         return self
-    
 
     def __str__(self):
         return str(self.__coordinates.round(2))
@@ -127,21 +143,26 @@ class Vector():
         return self
     def __rmul__(self, other):
         pass
-
+    def getStr(self):
+        return str(self.__coordinates[0])+' '+str(self.__coordinates[1])+' '+str(self.__coordinates[2])+'\n'
 def test():
 
     m = MatrixNxN(3)
     mm = MatrixNxN(3)
     m = m+3
     m=m.rot_X_martrix(90)
-    vec1,v2,v3 = Vector(2),Vector(3), Vector(3,[1,1,1])
+    v0,v1,v2,v3 = Vector(3), Vector(2),Vector(3), Vector(3,[1,1,1])
 
     mm.rot_Z_martrix(90)
     print(mm)
+    v1=v1+v3
     v2=v3*mm
+    v0=v0+10
+    print(v0)
     print(v2)
+    print(v1)
     # print(mm)
     # print()
     # print(m+mm)
 
-test()
+# test()
