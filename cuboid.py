@@ -57,7 +57,6 @@ class Cuboid(Geometric_obj):
     def getFileString(self):
         cuboidStr = ''
         return cuboidStr
-
     def __str__(self):
         s=''
         for i in range(0, len(self.vertexesList)):
